@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Examiner Data Queries</h2>
+<form method="POST">
+    <label for="action">Choose an action:</label>
+    <select name="action" id="action">
+        <option value="formatted_exam_dates">Formatted Exam Dates</option>
+        <option value="examiner_teaching_experience">Teaching Experience of Examiners</option>
+    </select>
+    <button type="submit">Submit</button>
+</form>
+
+{% if results %}
+<h3>Results:</h3>
+<table>
+    <thead>
+        <tr>
+            {% for column in results[0]._fields %}
+            <th>{{ column }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in results %}
+        <tr>
+            {% for column in row %}
+            <td>{{ column }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}
